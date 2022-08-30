@@ -6,20 +6,6 @@ bubu.shape("classic")
 bubu.color("pink")
 
 
-# drawing a square
-#steps = 4
-# while steps > 0:
-# bubu.forward(100)
-# bubu.right(90)
-#steps -= 1
-
-# drawing a dashed line
-# for x in range(15):
-# bubu.forward(10)
-# bubu.penup()
-# bubu.forward(10)
-# bubu.pendown()
-
 # TODO: Draw a number of polygons with different colored lines.
 colors = ["pink", "red", "brown", "yellow", "green", "aquamarine",
           "indigo", "wheat", "seagreen", "slategrey", "purple", "orange", "blue"]
