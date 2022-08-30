@@ -1,24 +1,26 @@
-from turtle import Turtle, Screen
+import turtle as t
 import random
 
 # TODO: draw a  random walk
-colors = ["pink", "red", "brown", "yellow", "green", "aquamarine",
-          "indigo", "wheat", "seagreen", "slategrey", "purple", "orange", "blue"]
-
 directions = [0, 90, 180, 270]
+bubu = t.Turtle()
+t.colormode(255)
 
-bubu = Turtle()
 bubu.shape("classic")
 bubu.color("pink")
 bubu.pensize(10)
 bubu.speed(10)
 
 
-for x in range(10000):
+def random_color():
+    r = random.randint(0, 255)
+    b = random.randint(0, 255)
+    g = random.randint(0, 255)
+    final_colors = (r, g, b)
+    return final_colors
+
+
+for x in range(500):
     bubu.forward(40)
-    bubu.color(random.choice(colors))
+    bubu.color(random_color())
     bubu.setheading(random.choice(directions))
-
-
-screen = Screen()
-screen.exitonclick()
