@@ -4,9 +4,11 @@ import random
 race_on = False
 screen = Screen()
 screen.setup(width=500, height=400)
+
 user_bet = screen.textinput(
     title="Make your bet", prompt="Which of the turtles do you think will win the race? Enter the color of  turtle you predict will win:")
 print(user_bet)
+
 colors = ["red", "orange", "yellow", "green", "blue", "purple"]
 y_positions = [-70, -40, -10, 20, 50, 80]
 all_turtles = []
@@ -14,7 +16,6 @@ all_turtles = []
 for turtle_index in range(0, 6):
     new_turtle = Turtle(shape="turtle")
     new_turtle.penup()
-
     new_turtle.goto(x=-230, y=y_positions[turtle_index])
     new_turtle.color(colors[turtle_index])
     all_turtles.append(new_turtle)
