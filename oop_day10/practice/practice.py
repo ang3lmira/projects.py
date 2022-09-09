@@ -3,7 +3,6 @@
 # print(data)
 
 import csv
-from traceback import print_list
 with open("weather_data.csv") as data_file:
     data = csv.reader(data_file)
     # print(data)
@@ -15,7 +14,6 @@ with open("weather_data.csv") as data_file:
     # print(temperatures)
 
 import pandas
-
 data = pandas.read_csv("weather_data.csv")
 # print(type(data))
 # print(data["temp"])
