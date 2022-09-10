@@ -12,20 +12,31 @@ turtle.shape(image)
 data = pandas.read_csv("map_project/us-states-game-start/50_states.csv")
 all_states = data.state.to_list()
 
-answer_state = screen.textinput(
-    title="Guess the state", prompt="What's another state's name?").lower()
+
+guessed_states = []
+
+while len(guessed_states) < 50:
+    answer_state = screen.textinput(
+        title=f"{len(guessed_states)}/50 States Correct", prompt="What's another state's name?").title()
+
+# Use secret code to leave loop
+    if answer_state == "Exit":
+        missing_states = []
+        for state in all_states:
+            if state not in guessed_states:
+                missing_states.append(state)
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn.csv")
+        break
 
 # check validity of users answer
-if answer_state in all_states:
-    t = turtle.Turtle()
-    t.color("pink")
-    t.hideturtle()
-    t.penup()
-    state_data = data[data.state == answer_state]
-    t.goto(int(state_data.x), int(state_data.y))
-    t.write(state_data.state)
+    if answer_state in all_states:
+        guessed_states.append(answer_state)
+        t = turtle.Turtle()
+        t.hideturtle()
+        t.penup()
+        state_data = data[data.state == answer_state]
+        t.goto(int(state_data.x), int(state_data.y))
+        t.write(answer_state)
 
-# if right, write state name on its position.
-
-
-screen.exitonclick()
+# screen.exitonclick()
