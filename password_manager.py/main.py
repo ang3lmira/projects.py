@@ -1,7 +1,27 @@
+import pyperclip
 from tkinter import *
+from tkinter import messagebox
+from random import choice, randint, shuffle
+
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
+
+def generate_password():
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+               'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+    password_letters = [choice(letters) for _ in range(randint(8, 10))]
+    password_symbols = [choice(symbols) for _ in range(randint(2, 4))]
+    password_numbers = [choice(numbers) for _ in range(randint(2, 4))]
+    password_list = password_letters + password_symbols + password_numbers
+    shuffle(password_list)
+
+    password = "".join(password_list)
+    password_box.insert(0, password)
+    pyperclip.copy(password)
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 
@@ -10,8 +30,20 @@ def save():
     email_info = email_box.get()
     password_info = password_box.get()
 
-    with open("data.txt", "a") as data_file:
-        data_file.write(f"{website_info} | {email_info} | {password_info} ")
+    if len(website_info) == 0 or len(password_info) == 0:
+        messagebox.showinfo(title="Something isn't right :$",
+                            message="Please fill in the boxes with info.")
+
+    else:
+        is_ok = messagebox.askokcancel(
+            title=website, message=f"These are the details you've entered \nEmail: {email_info}\nPassword: {password_info}\nAre you ready to save this info?")
+
+        if is_ok:
+            with open("data.txt", "a") as data_file:
+                data_file.write(
+                    f"{website_info} | {email_info} | {password_info}\n ")
+                website_box.delete(0, END)
+                password_box.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -45,7 +77,8 @@ password_box = Entry(width=21)
 password_box.grid(row=3, column=1)
 
 
-password_generator = Button(text="Generate Password")
+password_generator = Button(
+    text="Generate Password", command=generate_password)
 password_generator.grid(row=3, column=2)
 
 add_password = Button(text="Add", width=36, command=save)
