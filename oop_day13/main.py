@@ -12,6 +12,8 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
+timer = None
+
 # ---------------------------- TIMER RESET ------------------------------- #
 
 
@@ -20,6 +22,8 @@ def reset():
     canvas.itemconfig(timer_label, text="00:00")
     timer_label.config(text="Timer")
     check_marks.config(text=" ")
+    global reps
+    reps = 0
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
 
